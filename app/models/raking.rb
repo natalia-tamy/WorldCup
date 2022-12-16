@@ -1,0 +1,2 @@
+class Raking < ApplicationRecord
+end

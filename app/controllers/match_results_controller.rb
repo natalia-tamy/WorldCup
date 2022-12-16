@@ -1,4 +1,4 @@
-class MatchesController < ActionController
+class MatchResultsController < ActionController
 
   def new
     @match_result = MatchResult.new
