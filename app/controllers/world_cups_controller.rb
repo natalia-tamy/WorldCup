@@ -1,7 +1,7 @@
 class WorldCupsController < ActionController
   
   def index
-    @world_cups = WorldCup.all
+    @world_cup = WorldCup.all
   end
 
   def show
