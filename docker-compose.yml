@@ -1,0 +1,35 @@
+version: "2"
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+      - bundle_path:/bundle
+    environment:
+      - BUNDLE_PATH=/bundle/vendor
+      - BUNDLE_APP_CONFIG=/app/.bundle
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    command: bundle exec rails server -b 0.0.0.0
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "db"
+    stdin_open: true
+    tty: true
+
+  db:
+    image: postgres:13.6
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+volumes:
+  bundle_path:
+  db:
