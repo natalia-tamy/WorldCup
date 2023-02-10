@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_16_175834) do
+ActiveRecord::Schema.define(version: 2023_02_07_201649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "group_rankings", force: :cascade do |t|
+    t.jsonb "position"
+    t.bigint "groups_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["groups_id"], name: "index_group_rankings_on_groups_id"
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -73,6 +81,7 @@ ActiveRecord::Schema.define(version: 2022_12_16_175834) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "group_rankings", "groups", column: "groups_id"
   add_foreign_key "groups", "tournaments"
   add_foreign_key "match_results", "matches"
   add_foreign_key "matches", "teams", column: "team_a_id"

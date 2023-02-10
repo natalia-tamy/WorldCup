@@ -1,6 +1,6 @@
 class GroupRankingsController < ActionController
   
-  def show
-    @group_ranking = Ranking.find(params[:id])
+  def index
+    @group_ranking = Ranking.where(tournament_id: params[:tournament_id]).order("position")
   end
 end
