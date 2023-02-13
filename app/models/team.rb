@@ -1,6 +1,6 @@
 class Team < ApplicationRecord
   belongs_to :tournament
-  has_many :matches, dependent: :destroy
+  has_one :rankings, dependent: :destroy
 
   validates :name, presence: true
   validates :score, presence: true
